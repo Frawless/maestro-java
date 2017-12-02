@@ -66,6 +66,7 @@
         <module>maestro-exporter</module>
         <module>maestro-workers</module>
         <module>maestro-worker</module>
+        <module>maestro-inspector</module>
 
     </modules>
 
