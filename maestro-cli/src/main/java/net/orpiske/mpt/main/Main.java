@@ -16,10 +16,7 @@
 
 package net.orpiske.mpt.main;
 
-import net.orpiske.mpt.main.actions.Action;
-import net.orpiske.mpt.main.actions.DownloadAction;
-import net.orpiske.mpt.main.actions.ReportAction;
-import net.orpiske.mpt.main.actions.MaestroAction;
+import net.orpiske.mpt.main.actions.*;
 import org.apache.commons.cli.*;
 
 import static java.util.Arrays.copyOfRange;
@@ -38,8 +35,9 @@ public class Main {
         System.out.println("Usage: maestro-cli <action>\n");
 
         System.out.println("Actions:");
-        System.out.println("   report");
+        System.out.println("   data");
         System.out.println("   maestro");
+        System.out.println("   report");
         System.out.println("----------");
         System.out.println("   help");
         System.out.println("   --version");
@@ -65,6 +63,10 @@ public class Main {
 
         Action action;
         switch (first) {
+            case "data": {
+                action = new DataAction(newArgs);
+                break;
+            }
             case "report": {
                 action = new ReportAction(newArgs);
                 break;
