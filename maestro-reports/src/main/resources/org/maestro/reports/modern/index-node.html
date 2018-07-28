@@ -106,15 +106,7 @@
                                     <td>Messaging System</td>
                                     <td>{{ productName | default('Undefined') }} {{ productVersion }}</td>
                                 </tr>
-                                <tr>
-                                    <td>System Report</td>
-                                    <td>{{ jvmName }} {{ jvmVersion }} {{ jvmPackageVersion }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Operating System</td>
-                                    <td>{{ operatingSystemName }} - {{ operatingSystemVersion }}</td>
-                                </tr>
-                                {% else %}
+                                {% endif %}
 
                                 <tr>
                                     <td>Message Size</td>
@@ -189,7 +181,7 @@
 
                                 {% endif %}
 
-                                {% endif %}
+
                             </tbody>
                         </table>
                     </div>

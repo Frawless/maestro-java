@@ -18,6 +18,7 @@ package org.maestro.inspector.base;
 
 import org.maestro.client.exchange.support.PeerInfo;
 import org.maestro.client.notes.*;
+import org.maestro.common.exceptions.DurationParseException;
 import org.maestro.common.exceptions.MaestroException;
 import org.maestro.common.inspector.MaestroInspector;
 import org.maestro.common.worker.TestLogUtils;
@@ -119,9 +120,13 @@ public class InspectorManager extends MaestroWorkerManager implements MaestroIns
         final File testLogDir = TestLogUtils.findLastLogDir(logDir);
 
         try {
+            super.writeTestProperties(testLogDir);
             super.writeSystemProperties(testLogDir);
         } catch (IOException e) {
             logger.error("Unable to write system properties on Inspector node: {}", e.getMessage(), e);
+            e.printStackTrace();
+        } catch (DurationParseException e) {
+            logger.error("Unable to write test properties on Inspector node: {}", e.getMessage(), e);
             e.printStackTrace();
         }
 
