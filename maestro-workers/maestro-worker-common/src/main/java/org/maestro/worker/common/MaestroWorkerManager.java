@@ -268,8 +268,6 @@ public abstract class MaestroWorkerManager extends AbstractMaestroPeer<MaestroEv
         systemProperties.setWorkerJvmVersion(System.getProperty("java.vm.version"));
         logger.info("JVM Version: {}", systemProperties.getWorkerJvmVersion());
 
-        logger.info(testLogDir.toString());
-
         systemProperties.write(new File(testLogDir, SystemProperties.FILENAME));
     }
 

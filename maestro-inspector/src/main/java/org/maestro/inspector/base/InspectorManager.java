@@ -118,8 +118,6 @@ public class InspectorManager extends MaestroWorkerManager implements MaestroIns
 
         final File testLogDir = TestLogUtils.findLastLogDir(logDir);
 
-        logger.debug("Trying save system info into: {}", logDir);
-
         try {
             super.writeSystemProperties(testLogDir);
         } catch (IOException e) {
