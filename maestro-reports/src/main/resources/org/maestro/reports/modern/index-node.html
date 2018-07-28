@@ -122,7 +122,11 @@
                                 </tr>
                                 <tr>
                                     <td>Test Duration</td>
+                                    {% if nodeDuration == "time" %}
                                     <td>{{ duration }} seconds</td>
+                                    {% else %}
+                                    <td>{{ duration }} messages</td>
+                                    {% endif %}
                                 </tr>
                                 <tr>
                                     <td>Concurrent Connections</td>
