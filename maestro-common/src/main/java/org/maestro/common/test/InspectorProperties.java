@@ -123,7 +123,7 @@ public class InspectorProperties extends CommonProperties {
         super.write(prop);
 
         try (FileOutputStream fos = new FileOutputStream(testProperties)) {
-            prop.store(fos, "maestro");
+            prop.store(fos, "maestro-inspector");
         }
     }
 
@@ -213,5 +213,15 @@ public class InspectorProperties extends CommonProperties {
 
     public void setProductVersion(String productVersion) {
         this.productVersion = productVersion;
+    }
+
+    @Override
+    public String toString() {
+        return "InspectorProperties{" +
+                "productName='" + productName + '\'' +
+                ", productVersion='" + productVersion + '\'' +
+                ", jvmName='" + jvmName + '\'' +
+                ", jvmVersion='" + jvmVersion + '\'' +
+                "} " + super.toString();
     }
 }

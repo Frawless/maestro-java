@@ -20,12 +20,14 @@ import org.maestro.client.exchange.support.PeerInfo;
 import org.maestro.client.notes.*;
 import org.maestro.common.exceptions.MaestroException;
 import org.maestro.common.inspector.MaestroInspector;
+import org.maestro.common.worker.TestLogUtils;
 import org.maestro.worker.common.MaestroWorkerManager;
 import org.maestro.worker.common.ds.MaestroDataServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class InspectorManager extends MaestroWorkerManager implements MaestroInspectorEventListener {
@@ -113,6 +115,17 @@ public class InspectorManager extends MaestroWorkerManager implements MaestroIns
     @Override
     public void handle(final StopInspector note) {
         logger.debug("Stop inspector request received");
+
+        final File testLogDir = TestLogUtils.findLastLogDir(logDir);
+
+        logger.debug("Trying save system info into: {}", logDir);
+
+        try {
+            super.writeSystemProperties(testLogDir);
+        } catch (IOException e) {
+            logger.error("Unable to write system properties on Inspector node: {}", e.getMessage(), e);
+            e.printStackTrace();
+        }
 
         if (inspectorThread != null) {
             try {
