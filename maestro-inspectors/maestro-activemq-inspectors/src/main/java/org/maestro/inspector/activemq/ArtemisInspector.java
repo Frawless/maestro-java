@@ -155,7 +155,7 @@ public class ArtemisInspector implements MaestroInspector {
 
             connect();
 
-            writeInspectorProperties(logDir, inspectorProperties, runtimeInfoWriter, osInfoWriter, productInfoWriter);
+            writeInspectorProperties(logDir, inspectorProperties, productInfoWriter);
 
             while (duration.canContinue(this) && isRunning()) {
                 LocalDateTime now = LocalDateTime.now();
@@ -198,15 +198,8 @@ public class ArtemisInspector implements MaestroInspector {
     }
 
     private void writeInspectorProperties(File logDir, InspectorProperties inspectorProperties,
-                                          RuntimeInfoWriter runtimeInfoWriter, OSInfoWriter osInfoWriter,
                                           ProductInfoWriter productInfoWriter) throws MalformedObjectNameException, J4pException, IOException {
         setCommonProperties(inspectorProperties, workerOptions);
-
-        OSInfo osInfo = artemisDataReader.operatingSystem();
-        osInfoWriter.write(null, osInfo);
-
-        RuntimeInfo runtimeInfo = artemisDataReader.runtimeInformation();
-        runtimeInfoWriter.write(null, runtimeInfo);
 
         ProductInfo productInfo = artemisDataReader.productInformation();
         productInfoWriter.write(null, productInfo);
