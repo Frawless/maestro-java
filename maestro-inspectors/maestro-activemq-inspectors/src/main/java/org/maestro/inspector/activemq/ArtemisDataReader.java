@@ -97,6 +97,41 @@ public class ArtemisDataReader {
         return jvmMemoryInfos;
     }
 
+    /**
+     * Reads operating system information information (might be JVM-specific)
+     * @return operating system information
+     * @throws MalformedObjectNameException JMX internal/specific error
+     * @throws J4pException if unable to read (ie: forbidden to read the value)
+     */
+    @SuppressWarnings("unchecked")
+    public OSInfo operatingSystem() throws MalformedObjectNameException, J4pException {
+        JSONObject jo = getJsonObject("java.lang:type=OperatingSystem", "");
+
+        Map<String, Object> osProperties = new HashMap<>();
+        JolokiaConverter jolokiaConverter = new MapConverter(osProperties);
+        jo.forEach((key, value) -> defaultJolokiaParser.parse(jolokiaConverter, key, value));
+
+        return new OSInfo(osProperties);
+    }
+
+
+    /**
+     * Reads runtime information information (might be JVM-specific)
+     * @return operating system information
+     * @throws MalformedObjectNameException JMX internal/specific error
+     * @throws J4pException if unable to read (ie: forbidden to read the value)
+     */
+    @SuppressWarnings("unchecked")
+    public RuntimeInfo runtimeInformation() throws MalformedObjectNameException, J4pException {
+        JSONObject jo = getJsonObject("java.lang:type=Runtime", "");
+
+        Map<String, Object> osProperties = new HashMap<>();
+        JolokiaConverter jolokiaConverter = new MapConverter(osProperties);
+        jo.forEach((key, value) -> defaultJolokiaParser.parse(jolokiaConverter, key, value));
+
+        return new RuntimeInfo(osProperties);
+    }
+
 
     /**
      * Read queue information
