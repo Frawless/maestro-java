@@ -181,7 +181,13 @@ public abstract class MaestroWorkerManager extends AbstractMaestroPeer<MaestroEv
     }
 
 
-    void writeTestProperties(final File testLogDir) throws IOException, DurationParseException {
+    /**
+     * Method for write test properties
+     * @param testLogDir directory for logs
+     * @throws IOException input/output exception
+     * @throws DurationParseException implementation specific
+     */
+    protected void writeTestProperties(final File testLogDir) throws IOException, DurationParseException {
         TestProperties testProperties = new TestProperties();
 
         final String testNumber = testLogDir.getName();
